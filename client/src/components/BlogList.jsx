@@ -5,7 +5,7 @@ import BlogCard from "./BlogCard";
 import { useAppContext } from "../context/AppContext.jsx";
 import Loader from "./Loader";
 
-const Bloglist = () => {
+const BlogList = () => {
   const [menu, setMenu] = useState("All");
   const { blogs, input } = useAppContext();
 
@@ -60,4 +60,4 @@ const Bloglist = () => {
   );
 };
 
-export default Bloglist;
+export default BlogList;
