@@ -1,17 +1,18 @@
-import fs from "fs";
 import imagekit from "../configs/imageKit.js";
 import Blog from "../models/Blog.js";
-import Comment from "../models/Comment.js";
 import main from "../configs/gemini.js";
+import Comment from "../models/Comment.js";
 
 export const addBlog = async (req, res) => {
   try {
+    // Parse blog data from request
     const { title, subtitle, description, category, isPublished } = JSON.parse(
       req.body.blog
     );
 
     const imageFile = req.file;
 
+    // Validate required fields
     if (
       !title ||
       !category ||
@@ -22,25 +23,17 @@ export const addBlog = async (req, res) => {
       return res.json({ success: false, message: "Missing required field(s)" });
     }
 
-    const fileBuffer = fs.readFileSync(imageFile.path);
-    const fileBase64 = fileBuffer.toString("base64");
+    // Convert uploaded image buffer to base64 (no disk writes)
+    const fileBase64 = imageFile.buffer.toString("base64");
 
-    // upload image at imagekit
+    // Upload image to ImageKit
     const response = await imagekit.files.upload({
       file: fileBase64,
       fileName: imageFile.originalname,
       folder: "/blogs",
     });
 
-    // console.log("response.filePath:", response.filePath);
-    // console.log("URL :", process.env.IMAGEKIT_URL_ENDPOINT);
-    // console.log("URL :", imagekit._options.urlEndpoint);
-    // console.log("RESPONSE :", response);
-
-    // Delete the local file after successful upload
-    fs.unlinkSync(imageFile.path);
-
-    // optimization through imagekit url transformation
+    // Apply ImageKit transformations for optimization
     const optimizationImageURL = imagekit.helper.buildSrc({
       urlEndpoint: imagekit._options.urlEndpoint,
       src: response.filePath,
@@ -51,20 +44,19 @@ export const addBlog = async (req, res) => {
       ],
     });
 
-    const image = optimizationImageURL;
-
+    // Save new blog in MongoDB
     await Blog.create({
       title,
       subtitle,
       description,
       category,
-      image,
+      image: optimizationImageURL,
       isPublished: Boolean(isPublished),
     });
 
     res.json({ success: true, message: "Blog added successfully" });
   } catch (error) {
-    // console.log(error);
+    console.error("Add Blog Error:", error);
     res.json({ success: false, message: error.message });
   }
 };
