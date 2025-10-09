@@ -6,7 +6,7 @@ const Header = () => {
   const { input, setInput } = useAppContext();
   const inputRef = useRef();
 
-  const hanldeSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setInput(inputRef.current.value);
   };
@@ -26,13 +26,13 @@ const Header = () => {
           <img src={assets.star_icon} alt="" className="w-2.5" />
         </div>
 
-        <h1 className="text-3x1 sm:text-6xl font-semibold sm: leading-16 text-gray-700">
+        <h1 className="text-3xl sm:text-6xl font-semibold sm: leading-16 text-gray-700">
           Your own <span className="text-primary"> blogging</span> <br />{" "}
           platform.
         </h1>
 
         <p
-          className="my-6 sm:my-8 max-w-2x1 m-auto max-sm:text-xs
+          className="my-6 sm:my-8 max-w-2xl m-auto max-sm:text-xs
         text-gray-500"
         >
           This is your space to think out loud, to share what matters, and to
@@ -41,7 +41,7 @@ const Header = () => {
         </p>
 
         <form
-          onSubmit={hanldeSubmit}
+          onSubmit={handleSubmit}
           className="flex justify-between max-w-lg max-sm:scale-75 mx-auto border border-gray-300 bg-white rounded overflow-hidden"
         >
           <input
@@ -63,7 +63,7 @@ const Header = () => {
         {input && (
           <button
             onClick={onClear}
-            className="border font-light text-xs py-1 px-3 mt-8 rounded-sm shadow-coustom-sm cursor-pointer"
+            className="border font-light text-xs py-1 px-3 mt-8 rounded-sm shadow-custom-sm cursor-pointer"
           >
             Clear button
           </button>

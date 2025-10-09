@@ -9,7 +9,7 @@ const Bloglist = () => {
   const [menu, setMenu] = useState("All");
   const { blogs, input } = useAppContext();
 
-  if (!blogs) {
+  if (!blogs.length) {
     return <Loader />;
   }
   const filteredBlogs = () => {

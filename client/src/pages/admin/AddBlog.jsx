@@ -52,11 +52,11 @@ const AddBlog = () => {
         fetchBlogs();
       } else {
         console.log("else message : ", data.message);
-        // toast.error(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("error message : ", error.message);
-      // toast.error(error.message);
+      toast.error(error.message);
     } finally {
       setIsAdding(false);
     }
@@ -85,7 +85,7 @@ const AddBlog = () => {
   };
 
   useEffect(() => {
-    // initiate quilll only once
+    // initiate quill only once
     if (!quillRef.current && editorRef.current) {
       quillRef.current = new Quill(editorRef.current, { theme: "snow" });
     }
@@ -94,7 +94,7 @@ const AddBlog = () => {
   return (
     <form onSubmit={handleSubmit} className="flex-1 text-gray-600 ">
       <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
-        <p>Upload thummbnail</p>
+        <p>Upload thumbnail</p>
         <label htmlFor="image">
           <img
             src={!image ? assets.upload_area : URL.createObjectURL(image)}
