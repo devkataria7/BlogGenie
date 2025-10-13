@@ -144,10 +144,26 @@ export const getBlogComments = async (req, res) => {
 export const generateContent = async (req, res) => {
   try {
     const { prompt } = req.body;
+    const newPrompt = `
+      You are an expert content writer. Generate a blog post for the following topic:
 
-    const content = await main(
-      prompt + "Generate a blog content for this topic in simple text format"
-    );
+      Title: ${prompt}  
+        
+
+      Requirements:
+      1. Write in clear, simple, and professional language.
+      2. The blog should be **long and informative**, around 500–700 words or more.
+      3. Include a catchy subtitle.
+      4. Structure the blog as follows:
+        - A brief, engaging introduction (2–3 paragraphs)
+        - Main body with multiple sections, mixing paragraphs and bullet points for key tips, insights, or examples
+        - A concise conclusion (1–2 paragraphs)
+      5. Use headings or subheadings for each section if necessary.
+      6. Keep it unique, reader-friendly, and scannable.
+      7. Output only the blog content as plain text — do not include extra commentary or meta-text.
+      `;
+
+    const content = await main(newPrompt);
     res.json({ success: true, content });
   } catch (error) {
     res.json({ success: false, message: error.message });
