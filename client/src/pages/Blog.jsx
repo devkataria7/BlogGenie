@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { assets, blog_data, comments_data } from "../assets/assets";
+import { assets } from "../assets/assets";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Moment from "moment";
@@ -19,31 +19,21 @@ const Blog = () => {
   const [content, setContent] = useState("");
 
   const fetchBlogData = async () => {
-    // using dynamic data
     try {
       const { data } = await axios.get(`/api/blog/${id}`);
-      // console.log(data.blog);
       data.success ? setData(data.blog) : toast.error(data.message);
     } catch (error) {
       toast.error(error.message);
     }
-
-    // // used to fetch data while creating frontend only
-    // const data = blog_data.find((item) => item._id === id);
-    // setData(data);
   };
 
   const fetchComments = async () => {
     try {
       const { data } = await axios.post(`/api/blog/comments`, { blogID: id });
-      // console.log(data.comments);
       data.success ? setComments(data.comments) : toast.error(data.message);
     } catch (error) {
       toast.error(error.message);
     }
-
-    // // // used to fetch data while creating frontend only
-    // setComments(comments_data);
   };
 
   const addComment = async (e) => {
@@ -82,22 +72,20 @@ const Blog = () => {
 
       <Navbar />
 
-      {/* header section */}
-
-      <div className="text-center mt-20 text-gray-600">
+      <div className="text-center mt-20 text-slate-400">
         <p className="text-primary py-4 font-medium">
           Published on {Moment(data.createdAt).format("MMMM Do YYYY")}
         </p>
-        <h1 className="text-2xl sm:text-5xl font-semibold max-w-2xl mx-auto text-gray-800">
+        <h1 className="text-2xl sm:text-5xl font-semibold max-w-2xl mx-auto text-slate-100">
           {data.title}
         </h1>
-        <h2 className="my-5 max-w-lg truncate mx-auto">{data.subTitle}</h2>
-        <p className="inline-block py-1 px-4 rounded-full mb-6 border text-sm border-primary/35 bg-primary/5 font-medium text-primary">
+        <h2 className="my-5 max-w-lg truncate mx-auto text-slate-400">
+          {data.subTitle}
+        </h2>
+        <p className="inline-block py-1 px-4 rounded-full mb-6 border text-sm border-primary/35 bg-primary/10 font-medium text-primary">
           Dev Kataria
         </p>
       </div>
-
-      {/* image and blog data */}
 
       <div className="mx-5 max-w-5xl md:mx-auto my-10 mt-6">
         <img src={data.image} alt="" className="rounded-3xl mb-5" />
@@ -106,21 +94,22 @@ const Blog = () => {
           dangerouslySetInnerHTML={{ __html: data.description }}
         ></div>
 
-        {/* comment section */}
         <div className="mt-14 mb-10 max-w-3xl mx-auto">
-          <p className="font-semibold mb-4">Comments ({comments.length})</p>
+          <p className="font-semibold mb-4 text-slate-100">
+            Comments ({comments.length})
+          </p>
           <div className="flex flex-col gap-4">
             {comments.map((item, index) => (
               <div
                 key={index}
-                className="relative bg-primary/2 border border-primary/5 max-w-xl p-4 rounded text-gray-600"
+                className="relative bg-slate-900/80 border border-slate-800 max-w-xl p-4 rounded text-slate-300"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <img src={assets.user_icon} alt="" className="w-6" />
-                  <p className="font-medium">{item.name}</p>
+                  <p className="font-medium text-slate-100">{item.name}</p>
                 </div>
                 <p className="text-sm max-w-md ml-8">{item.content}</p>
-                <div className="absolute right-4 bottom-3 flex items-center gap-2 text-xs">
+                <div className="absolute right-4 bottom-3 flex items-center gap-2 text-xs text-slate-500">
                   {Moment(item.createdAt).fromNow()}
                 </div>
               </div>
@@ -128,10 +117,8 @@ const Blog = () => {
           </div>
         </div>
 
-        {/* add new comment box */}
-
         <div className="max-w-3xl mx-auto ">
-          <p className="font-semibold mb-4">Add your comment</p>
+          <p className="font-semibold mb-4 text-slate-100">Add your comment</p>
           <form
             onSubmit={addComment}
             className="flex flex-col items-start gap-4 max-w-lg"
@@ -142,13 +129,13 @@ const Blog = () => {
               type="text"
               placeholder="Name"
               required
-              className="w-full p-2 border border-gray-300 rounded outline-none"
+              className="w-full p-2 border border-slate-700 bg-slate-900/70 rounded outline-none text-slate-100 placeholder:text-slate-500"
             />
             <textarea
               onChange={(e) => setContent(e.target.value)}
               value={content}
               placeholder="Comment"
-              className="w-full p-2 border border-gray-300 rounded outline-none h-48"
+              className="w-full p-2 border border-slate-700 bg-slate-900/70 rounded outline-none h-48 text-slate-100 placeholder:text-slate-500"
               required
             ></textarea>
 
@@ -161,10 +148,8 @@ const Blog = () => {
           </form>
         </div>
 
-        {/* cahre buttons */}
-
         <div className="my-24 max-w-3xl mx-auto">
-          <p className="font-semibold my-4">
+          <p className="font-semibold my-4 text-slate-100">
             Share this article on social media
           </p>
           <div className="flex">

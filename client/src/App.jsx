@@ -15,7 +15,7 @@ import { useAppContext } from "./context/AppContext";
 const App = () => {
   const { token } = useAppContext();
   return (
-    <div>
+    <div className="min-h-screen bg-transparent text-slate-100">
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />

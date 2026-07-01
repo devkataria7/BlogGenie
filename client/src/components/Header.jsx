@@ -18,23 +18,17 @@ const Header = () => {
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative">
       <div className="text-center mt-20">
-        <div
-          className="inline-flex items-center justify-center gap-4 px-6 py-1.5 mb-4 border border-primary/40 bg-primary/10 rounded-full text-sm
-        text-primary"
-        >
+        <div className="inline-flex items-center justify-center gap-4 px-6 py-1.5 mb-4 border border-primary/40 bg-primary/10 rounded-full text-sm text-primary">
           <p>New: AI feature integrated</p>
           <img src={assets.star_icon} alt="" className="w-2.5" />
         </div>
 
-        <h1 className="text-3xl sm:text-6xl font-semibold sm: leading-16 text-gray-700">
+        <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-slate-100">
           Your own <span className="text-primary"> blogging</span> <br />{" "}
           platform.
         </h1>
 
-        <p
-          className="my-6 sm:my-8 max-w-2xl m-auto max-sm:text-xs
-        text-gray-500"
-        >
+        <p className="my-6 sm:my-8 max-w-2xl m-auto max-sm:text-xs text-slate-400">
           This is your space to think out loud, to share what matters, and to
           write without filters. Whether <br /> it's one word or a thousand,
           your story starts right here.
@@ -42,14 +36,14 @@ const Header = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="flex justify-between max-w-lg max-sm:scale-75 mx-auto border border-gray-300 bg-white rounded overflow-hidden"
+          className="flex justify-between max-w-lg max-sm:scale-75 mx-auto border border-slate-700 bg-slate-900/80 rounded overflow-hidden shadow-lg shadow-black/20"
         >
           <input
             ref={inputRef}
             type="text"
             placeholder="Search for blogs"
             required
-            className="w-full pl-4 outline-none"
+            className="w-full pl-4 outline-none bg-transparent text-slate-200 placeholder:text-slate-500"
           />
           <button
             type="submit"
@@ -63,7 +57,7 @@ const Header = () => {
         {input && (
           <button
             onClick={onClear}
-            className="border font-light text-xs py-1 px-3 mt-8 rounded-sm shadow-custom-sm cursor-pointer"
+            className="border border-slate-700 bg-slate-900/70 text-slate-300 font-light text-xs py-1 px-3 mt-8 rounded-sm shadow-custom-sm cursor-pointer"
           >
             Clear button
           </button>

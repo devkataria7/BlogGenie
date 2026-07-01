@@ -5,12 +5,51 @@
   font-family: "Outfit", sans-serif;
 }
 
+:root {
+  color-scheme: dark;
+  background-color: #020617;
+  color: #f8fafc;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #020617 0%, #0f172a 45%, #111827 100%);
+  color: #f8fafc;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
 
 @theme {
-  --color-primary: #5044e5;
+  --color-primary: #7c3aed;
+}
+
+input,
+textarea,
+select,
+button {
+  color: inherit;
+}
+
+.ql-toolbar,
+.ql-container {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.ql-toolbar .ql-stroke,
+.ql-toolbar .ql-fill,
+.ql-toolbar .ql-picker-label {
+  stroke: #cbd5e1 !important;
+  fill: #cbd5e1 !important;
+  color: #cbd5e1 !important;
 }
 
 .rich-text {
@@ -19,48 +58,48 @@
 
 .rich-text p {
   margin-bottom: 16px;
-  color: #292929;
+  color: #e2e8f0;
 }
 
 .rich-text h1 {
   font-size: 36px;
   font-weight: 700;
-  color: #252525 !important;
+  color: #f8fafc !important;
   margin: 32px 0;
 }
 
 .rich-text h2 {
   font-size: 22px;
   font-weight: 700;
-  color: #252525 !important;
+  color: #f8fafc !important;
   margin: 24px 0;
 }
 
 .rich-text h3 {
   font-size: 18px;
   font-weight: 600;
-  color: #333333 !important;
+  color: #f1f5f9 !important;
   margin: 20px 0;
 }
 
 .rich-text h4 {
   font-size: 16px;
   font-weight: 500;
-  color: #444444 !important;
+  color: #e2e8f0 !important;
   margin: 16px 0;
 }
 
 .rich-text h5 {
   font-size: 14px;
   font-weight: 400;
-  color: #555555 !important;
+  color: #cbd5e1 !important;
   margin: 12px 0;
 }
 
 .rich-text h6 {
   font-size: 12px;
   font-weight: 400;
-  color: #666666 !important;
+  color: #94a3b8 !important;
   margin: 8px 0;
 }
 
@@ -83,5 +122,5 @@
 }
 
 .rich-text a {
-  color: #007aff;
+  color: #8b5cf6;
 }

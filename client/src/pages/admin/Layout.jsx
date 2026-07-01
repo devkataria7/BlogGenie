@@ -13,9 +13,8 @@ const Layout = () => {
     navigate("/");
   };
   return (
-    <div className="flex flex-1 flex-col h-screen overflow-hidden">
-      {/* Navbar fixed height */}
-      <div className="flex items-center justify-between py-2 h-[70px] px-4 sm:px-12 border-b border-gray-200 flex-shrink-0">
+    <div className="flex flex-1 flex-col h-screen overflow-hidden bg-slate-950 text-slate-100">
+      <div className="flex items-center justify-between py-2 h-[70px] px-4 sm:px-12 border-b border-slate-800 bg-slate-950/90 flex-shrink-0">
         <img
           src={assets.logo}
           alt=""
@@ -30,13 +29,9 @@ const Layout = () => {
         </button>
       </div>
 
-      {/* Sidebar + Main content */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar fixed width */}
         <Sidebar />
-
-        {/* Main content scrolls internally */}
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto bg-slate-950">
           <Outlet />
         </div>
       </div>

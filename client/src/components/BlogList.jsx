@@ -20,19 +20,18 @@ const BlogList = () => {
     return blogs.filter(
       (blog) =>
         blog.title.toLowerCase().includes(input.toLowerCase()) ||
-        blog.category.toLowerCase().includes(input.toLowerCase())
+        blog.category.toLowerCase().includes(input.toLowerCase()),
     );
   };
   return (
     <div>
       <div className="flex justify-center gap-4 sm:gap-8 my-10 relative">
-        {/* for search categories */}
         {blogCategories.map((item) => (
           <div key={item} className="relative">
             <button
               onClick={() => setMenu(item)}
-              className={` cursor-pointer text-gray-500 ${
-                menu === item && "text-white px-4 pt-0.5"
+              className={`cursor-pointer text-slate-400 px-3 py-1 rounded-full ${
+                menu === item && "text-white bg-primary/20 px-4"
               }`}
             >
               {item}
@@ -40,8 +39,7 @@ const BlogList = () => {
                 <motion.div
                   layoutId="underline"
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  className="absolute left-0 right-0 top-0 h-7 -z-1
-                bg-primary rounded-full"
+                  className="absolute left-0 right-0 top-0 h-7 -z-1 bg-primary rounded-full"
                 ></motion.div>
               )}
             </button>

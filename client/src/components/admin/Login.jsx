@@ -27,20 +27,20 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="w-full max-w-sm p-6 max-md:m-6 border border-primary/30 shadow-xl shadow-primary/15 rounded-lg">
+    <div className="flex items-center justify-center h-screen bg-transparent">
+      <div className="w-full max-w-sm p-6 max-md:m-6 border border-slate-800 bg-slate-900/80 shadow-xl shadow-black/30 rounded-lg">
         <div className="flex flex-col items-center justify-center">
           <div className="w-full py-6 text-center">
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl font-bold text-slate-100">
               <span className="text-primary">Admin</span> Login
             </h1>
-            <p className="font-light">
+            <p className="font-light text-slate-400">
               Enter your credentials to access the admin panel
             </p>
           </div>
           <form
             onSubmit={handleSubmit}
-            className="mt-6 w-full sm:max-w-md text-gray-600"
+            className="mt-6 w-full sm:max-w-md text-slate-300"
           >
             <div className="flex flex-col">
               <label>Email</label>
@@ -50,7 +50,7 @@ const Login = () => {
                 type="email"
                 required
                 placeholder="Enter email id"
-                className="border-b-2 border-gray-300 p-2 outline-none mb-6"
+                className="border-b-2 border-slate-700 bg-transparent p-2 outline-none mb-6"
               />
             </div>
             <div className="flex flex-col">
@@ -61,11 +61,11 @@ const Login = () => {
                 type="password"
                 required
                 placeholder="Enter password"
-                className="border-b-2 border-gray-300 p-2 outline-none mb-6"
+                className="border-b-2 border-slate-700 bg-transparent p-2 outline-none mb-6"
               />
               <button
                 type="submit"
-                className=" w-full py-3 font-medium bg-primary text-white rounded cursor-pointer hover:bg-primary/90 transition-all"
+                className="w-full py-3 font-medium bg-primary text-white rounded cursor-pointer hover:bg-primary/90 transition-all"
               >
                 Login
               </button>

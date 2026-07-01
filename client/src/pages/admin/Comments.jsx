@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { comments_data } from "../../assets/assets";
 import CommentTableItem from "../../components/admin/CommentTableItem";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
@@ -23,14 +22,16 @@ const Comments = () => {
     fetchComments();
   }, []);
   return (
-    <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16">
+    <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 text-slate-300">
       <div className="flex justify-between items-center max-w-3xl">
-        <h1>Comments</h1>
+        <h1 className="text-slate-100">Comments</h1>
         <div className="flex gap-4">
           <button
             onClick={() => setFilter(`Approved`)}
-            className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${
-              filter === `Approved` ? `text-primary` : `text-gray-700`
+            className={`shadow-custom-sm border border-slate-700 rounded-full px-4 py-1 cursor-pointer text-xs ${
+              filter === `Approved`
+                ? `text-primary bg-primary/10`
+                : `text-slate-400 bg-slate-900/70`
             }`}
           >
             Approved
@@ -38,8 +39,10 @@ const Comments = () => {
 
           <button
             onClick={() => setFilter(`Not Approved`)}
-            className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${
-              filter === `Not Approved` ? `text-primary` : `text-gray-700`
+            className={`shadow-custom-sm border border-slate-700 rounded-full px-4 py-1 cursor-pointer text-xs ${
+              filter === `Not Approved`
+                ? `text-primary bg-primary/10`
+                : `text-slate-400 bg-slate-900/70`
             }`}
           >
             Not Approved
@@ -47,9 +50,9 @@ const Comments = () => {
         </div>
       </div>
 
-      <div className="relative max-h-125 max-w-3xl overflow-x-auto mt-4 bg-white shadow rounded-lg scrollbar-hide">
-        <table className="w-full text-sm text-gray-500">
-          <thead className="text-xs text-gray-700 text-left uppercase sticky top-0 bg-white z-10 shadow-sm">
+      <div className="relative max-h-125 max-w-3xl overflow-x-auto mt-4 bg-slate-900/80 border border-slate-800 shadow rounded-lg scrollbar-hide">
+        <table className="w-full text-sm text-slate-400">
+          <thead className="text-xs text-slate-300 text-left uppercase sticky top-0 bg-slate-900 z-10 shadow-sm">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Blog title & Comment

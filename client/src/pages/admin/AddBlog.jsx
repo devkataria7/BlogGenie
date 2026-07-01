@@ -38,10 +38,7 @@ const AddBlog = () => {
       formData.append("image", image);
 
       const { data } = await axios.post("/api/blog/add", formData);
-      // console.log(data);
-
       if (data.success) {
-        // console.log("success message : ", data.message);
         toast.success(data.message);
         setImage(false);
         setTitle("");
@@ -51,11 +48,9 @@ const AddBlog = () => {
         setIsPublished(false);
         fetchBlogs();
       } else {
-        console.log("else message : ", data.message);
         toast.error(data.message);
       }
     } catch (error) {
-      console.log("error message : ", error.message);
       toast.error(error.message);
     } finally {
       setIsAdding(false);
@@ -85,16 +80,15 @@ const AddBlog = () => {
   };
 
   useEffect(() => {
-    // initiate quill only once
     if (!quillRef.current && editorRef.current) {
       quillRef.current = new Quill(editorRef.current, { theme: "snow" });
     }
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="flex-1 text-gray-600 ">
-      <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
-        <p>Upload thumbnail</p>
+    <form onSubmit={handleSubmit} className="flex-1 text-slate-300">
+      <div className="bg-slate-900/80 border border-slate-800 w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
+        <p className="text-slate-200">Upload thumbnail</p>
         <label htmlFor="image">
           <img
             src={!image ? assets.upload_area : URL.createObjectURL(image)}
@@ -109,28 +103,28 @@ const AddBlog = () => {
             hidden
           />
         </label>
-        <p className="mt-4">Blog title</p>
+        <p className="mt-4 text-slate-200">Blog title</p>
         <input
           type="text"
           placeholder="Type here"
-          className="w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded"
+          className="w-full max-w-lg mt-2 p-2 border border-slate-700 bg-slate-950/70 outline-none rounded text-slate-100"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
 
-        <p className="mt-4">Subtitle</p>
+        <p className="mt-4 text-slate-200">Subtitle</p>
         <input
           type="text"
           placeholder="Type here"
-          className="w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded"
+          className="w-full max-w-lg mt-2 p-2 border border-slate-700 bg-slate-950/70 outline-none rounded text-slate-100"
           onChange={(e) => setSubTitle(e.target.value)}
           value={subTitle}
         />
-        <p className="mt-4">Description</p>
+        <p className="mt-4 text-slate-200">Description</p>
         <div className="max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative">
           <div ref={editorRef}></div>
           {loading && (
-            <div className="absolute right-0 top-0 bottom-0 left-0 flex items-center justify-center bg-black/10 mt-2">
+            <div className="absolute right-0 top-0 bottom-0 left-0 flex items-center justify-center bg-black/20 mt-2">
               <div className="w-8 h-8 rounded-full border-2 border-t-white animate-spin"></div>
             </div>
           )}
@@ -139,19 +133,19 @@ const AddBlog = () => {
             type="button"
             className={`absolute bottom-1 right-2 ml-2 text-xs text-white px-4 py-1.5 rounded ${
               loading
-                ? "bg-gray-300"
-                : " bg-black/70 hover:underline cursor-pointer"
+                ? "bg-slate-500"
+                : "bg-slate-800 hover:underline cursor-pointer"
             }`}
             onClick={generateContent}
           >
             {loading ? "Generating..." : "Generate with AI"}
           </button>
         </div>
-        <p className="mt-4">Blog Category </p>
+        <p className="mt-4 text-slate-200">Blog Category </p>
         <select
           onChange={(e) => setCategory(e.target.value)}
           name="category"
-          className="mt-2 px-3 py-2 border text-gray-500 border-gray-300 outline-none rounded"
+          className="mt-2 px-3 py-2 border border-slate-700 bg-slate-950/70 text-slate-300 outline-none rounded"
         >
           <option value="">Select Category</option>
           {blogCategories.map((item, index) => {
@@ -163,7 +157,7 @@ const AddBlog = () => {
           })}
         </select>
         <div className="flex gap-2 mt-4">
-          <p>Publish Now</p>
+          <p className="text-slate-200">Publish Now</p>
           <input
             type="checkbox"
             checked={isPublished}
@@ -175,7 +169,7 @@ const AddBlog = () => {
           disabled={isAdding}
           type="submit"
           className={`mt-8 w-40 h-10 text-white rounded text-sm ${
-            isAdding ? "bg-gray-300" : "bg-primary cursor-pointer"
+            isAdding ? "bg-slate-600" : "bg-primary cursor-pointer"
           }`}
         >
           {isAdding ? "Adding..." : "Add Blog"}
