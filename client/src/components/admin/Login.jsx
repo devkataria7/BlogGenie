@@ -5,8 +5,13 @@ import axios from "axios";
 
 const Login = () => {
   const { setToken } = useAppContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // demo cred
+  const [email, setEmail] = useState("demo@quickblog.com");
+  const [password, setPassword] = useState("Demo@852");
+
+  // for multiple admin
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

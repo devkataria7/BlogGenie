@@ -11,13 +11,13 @@ export const adminLogin = async (req, res) => {
     // console.log("password: ", password);
 
     if (email !== process.env.ADMIN_LOGIN) {
-      return res.json({ success: false, message: "Email not found" });
+      return res.json({ success: false, message: "Invalid Credentials" });
     }
 
     if (password !== process.env.ADMIN_PASSWORD) {
       return res.json({
         success: false,
-        message: "Incorrect Password",
+        message: "Invalid Credentials",
       });
     }
 
