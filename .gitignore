@@ -22,7 +22,9 @@ build/
 # ==========================
 # Environment / Secrets
 # ==========================
-.env            # covers any .env file (client & server)
+# covers any .env file (client & server)
+.env            
+.env.*
 .env.local
 .env.development
 .env.production
@@ -41,7 +43,7 @@ pm2.log
 .DS_Store
 Thumbs.db
 desktop.ini
-.vscode/
+.vscode/*
 .idea/
 *.suo
 *.ntvs*
