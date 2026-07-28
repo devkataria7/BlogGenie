@@ -6,7 +6,7 @@ import axios from "axios";
 const Login = () => {
   const { setToken } = useAppContext();
   // demo cred
-  const [email, setEmail] = useState("demo@BlogGeine.com");
+  const [email, setEmail] = useState("demo@BlogGenie.com");
   const [password, setPassword] = useState("Demo@852");
 
   // for multiple admin
