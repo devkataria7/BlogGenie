@@ -6,7 +6,21 @@ import axios from "axios";
 
 const AppContext = createContext();
 
+// ste axious url
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+
+// set axios interceptor
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+
+  (error) => {
+    toast.error(error.response?.data?.message || error.message);
+
+    return Promise.reject(error);
+  },
+);
 
 export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -21,7 +35,8 @@ export const AppProvider = ({ children }) => {
       //   console.log(data);
       data.success ? setBlogs(data.blogs) : toast.error(data.message);
     } catch (error) {
-      toast.error(error.message);
+      // handled by axios interceptor
+      // toast.error(error.message);
     }
   };
   const value = {

@@ -1,95 +1,117 @@
-import jwt from "jsonwebtoken";
-import Blog from "../models/Blog.js";
-import Comment from "../models/Comment.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import { login } from "../services/admin/adminService.js";
+import { fetchAllBlogs } from "../services/admin/blogService.js";
+import { fetchDashboardData } from "../services/admin/dashboardService.js";
+import { generateContent as generateBlogContent } from "../services/ai/aiService.js";
+import {
+  fetchAllComments,
+  deleteComment,
+  approveCommentById,
+} from "../services/admin/commentService.js";
+import {
+  toggleBlogPublishStatus,
+  deleteBlog,
+  createBlog,
+} from "../services/admin/blogService.js";
 
-export const adminLogin = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+// to login admin to dashboard
+export const adminLogin = asyncHandler(async (req, res) => {
+  const token = await login(req.body);
 
-    // console.log("body: ", req.body);
-    // console.log("email: ", email);
-    // console.log("password: ", password);
-
-    if (email !== process.env.ADMIN_LOGIN) {
-      return res.json({ success: false, message: "Invalid Credentials" });
-    }
-
-    if (password !== process.env.ADMIN_PASSWORD) {
-      return res.json({
-        success: false,
-        message: "Invalid Credentials",
-      });
-    }
-
-    const token = jwt.sign({ email }, process.env.JWT_SECRET);
-    res.json({ success: true, token });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
+  res.json({ success: true, token });
+});
 
 // to get all blog lists
-export const getAllBlogsAdmin = async (req, res) => {
-  try {
-    const blogs = await Blog.find({}).sort({ createdAt: -1 });
-    res.json({ success: true, blogs });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
+export const getAllBlogsAdmin = asyncHandler(async (req, res) => {
+  const blogs = await fetchAllBlogs();
+
+  res.json({
+    success: true,
+    blogs,
+  });
+});
 
 // to get all commenst
-export const getAllComments = async (req, res) => {
-  try {
-    const comments = await Comment.find({})
-      .populate("blog")
-      .sort({ createdAt: -1 });
-    res.json({ success: true, comments });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
+export const getAllComments = asyncHandler(async (req, res) => {
+  const comments = await fetchAllComments();
+
+  res.json({
+    success: true,
+    comments,
+  });
+});
 
 // dashboard data
-export const getDashboard = async (req, res) => {
-  try {
-    const recentBlogs = await Blog.find({}).sort({ createdAt: -1 }).limit(5);
-    const blogs = await Blog.countDocuments();
-    const comments = await Comment.countDocuments();
-    const drafts = await Blog.countDocuments({ isPublished: false });
+export const getDashboard = asyncHandler(async (req, res) => {
+  const dashboardData = await fetchDashboardData();
 
-    const dashboardData = {
-      blogs,
-      comments,
-      drafts,
-      recentBlogs,
-    };
-
-    res.json({ success: true, dashboardData });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
+  res.json({
+    success: true,
+    dashboardData,
+  });
+});
 
 // delete comment by id
-export const deleteCommentByID = async (req, res) => {
-  try {
-    const { id } = req.body;
-    await Comment.findByIdAndDelete(id);
-    res.json({ success: true, message: "Comment deleted successfully" });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
+export const deleteCommentByID = asyncHandler(async (req, res) => {
+  await deleteComment(req.body);
+
+  res.json({
+    success: true,
+    message: "Comment deleted successfully",
+  });
+});
 
 // approve comment
-export const approveComment = async (req, res) => {
-  try {
-    const { id } = req.body;
-    await Comment.findByIdAndUpdate(id, { isApproved: true });
+export const approveComment = asyncHandler(async (req, res) => {
+  await approveCommentById(req.body);
 
-    res.json({ success: true, message: "Comment approved successfully" });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
+  res.json({
+    success: true,
+    message: "Comment approved successfully",
+  });
+});
+
+// delete blog by id
+export const deleteBlogByID = asyncHandler(async (req, res) => {
+  await deleteBlog(req.body);
+
+  res.json({
+    success: true,
+    message: "Blog deleted successfully",
+  });
+});
+
+// toggle between publich and unpublish
+export const togglePublish = asyncHandler(async (req, res) => {
+  await toggleBlogPublishStatus(req.body);
+
+  res.json({
+    success: true,
+    message: "Blog status updated",
+  });
+});
+
+// add new blog
+export const addBlog = asyncHandler(async (req, res) => {
+  const blogData = JSON.parse(req.body.blog);
+
+  await createBlog({
+    ...blogData,
+    imageFile: req.file,
+  });
+
+  res.json({
+    success: true,
+    message: "Blog added successfully",
+  });
+});
+
+// used by addblog to generate content by AI
+export const generateContent = asyncHandler(async (req, res) => {
+  const content = await generateBlogContent(req.body);
+
+  res.json({
+    success: true,
+    content,
+  });
+});

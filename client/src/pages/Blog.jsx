@@ -25,7 +25,7 @@ const Blog = () => {
       // console.log(data.blog);
       data.success ? setData(data.blog) : toast.error(data.message);
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
 
     // // used to fetch data while creating frontend only
@@ -39,7 +39,7 @@ const Blog = () => {
       // console.log(data.comments);
       data.success ? setComments(data.comments) : toast.error(data.message);
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
 
     // // // used to fetch data while creating frontend only
@@ -63,7 +63,7 @@ const Blog = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

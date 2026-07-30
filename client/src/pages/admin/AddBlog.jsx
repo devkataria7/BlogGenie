@@ -37,7 +37,7 @@ const AddBlog = () => {
       formData.append("blog", JSON.stringify(blog));
       formData.append("image", image);
 
-      const { data } = await axios.post("/api/blog/add", formData);
+      const { data } = await axios.post("/api/admin/add", formData);
       // console.log(data);
 
       if (data.success) {
@@ -56,7 +56,7 @@ const AddBlog = () => {
       }
     } catch (error) {
       console.log("error message : ", error.message);
-      toast.error(error.message);
+      // toast.error(error.message);
     } finally {
       setIsAdding(false);
     }
@@ -68,7 +68,7 @@ const AddBlog = () => {
     }
     try {
       setLoading(true);
-      const { data } = await axios.post("/api/blog/generate", {
+      const { data } = await axios.post("/api/admin/generate", {
         prompt: title,
       });
 
@@ -78,7 +78,7 @@ const AddBlog = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     } finally {
       setLoading(false);
     }

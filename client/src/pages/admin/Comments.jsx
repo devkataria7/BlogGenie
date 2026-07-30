@@ -15,7 +15,7 @@ const Comments = () => {
       const { data } = await axios.get("api/admin/comments");
       data.success ? setComments(data.comments) : toast.error(data.message);
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   };
 

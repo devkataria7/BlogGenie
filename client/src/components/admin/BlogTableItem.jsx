@@ -16,21 +16,7 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
     }
 
     try {
-      const { data } = await axios.post("/api/blog/delete", { id: blog._id });
-      if (data.success) {
-        toast.success(data.message);
-        await fetchBlogs();
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  const togglePublish = async () => {
-    try {
-      const { data } = await axios.post("/api/blog/toggle-publish", {
+      const { data } = await axios.post("/api/admin/delete-blog", {
         id: blog._id,
       });
       if (data.success) {
@@ -40,7 +26,23 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
+    }
+  };
+
+  const togglePublish = async () => {
+    try {
+      const { data } = await axios.post("/api/admin/toggle-publish", {
+        id: blog._id,
+      });
+      if (data.success) {
+        toast.success(data.message);
+        await fetchBlogs();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      // toast.error(error.message);
     }
   };
 
